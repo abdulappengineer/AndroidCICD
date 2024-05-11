@@ -1,0 +1,44 @@
+# This is a basic workflow to help you get started with Actions
+name: AndroidBuild
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    run-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v4.1.5
+
+      # Set up a specific version of the Java JDK and add the command-line tools to the PATH
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.1
+
+      # Runs a single command using the runners shell
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      # Upload a build artifact that can be used by subsequent workflow steps
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: AndroidCICD.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+
+
+
+
+
+
