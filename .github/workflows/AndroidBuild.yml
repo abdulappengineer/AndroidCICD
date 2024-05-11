@@ -24,6 +24,9 @@ jobs:
       # Set up a specific version of the Java JDK and add the command-line tools to the PATH
       - name: Setup Java JDK
         uses: actions/setup-java@v4.2.1
+        with:
+          java-version: '17'
+          distribution: 'adopt'
 
       # Runs a single command using the runners shell
       - name: Build with Gradle
