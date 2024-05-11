@@ -28,7 +28,9 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      # Runs a single command using the runners shell
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+        # Runs a single command using the runners shell
       - name: Build with Gradle
         run: ./gradlew build
 
